@@ -8,6 +8,8 @@ public class GenerateGrid : MonoBehaviour
 
     private const int MaxSceneObjectCount = 20;
 
+    private const float BlockSize = 1f;
+
     [SerializeField]
     private GameObject blockGameObject;
 
@@ -17,8 +19,10 @@ public class GenerateGrid : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
+    [SerializeField]
     private int worldSizeX = 40;
 
+    [SerializeField]
     private int worldSizeZ = 40;
 
     private int noiseHeight = 5;
@@ -32,12 +36,10 @@ public class GenerateGrid : MonoBehaviour
     private List<Vector3> blockPositions = new();
 
     private int xPlayerLocation => (int)Mathf.Floor(player.transform.position.x);
-
     private int zPlayerLocation => (int)Mathf.Floor(player.transform.position.z);
 
-    public int XPlayerMove => (int)(player.transform.position.x - startPosition.x);
-
-    public int ZPlayerMove => (int)(player.transform.position.z - startPosition.z);
+    private int xPlayerMove => (int)(player.transform.position.x - startPosition.x);
+    private int zPlayerMove => (int)(player.transform.position.z - startPosition.z);
 
     // Start is called before the first frame update
     void Start()
@@ -46,10 +48,9 @@ public class GenerateGrid : MonoBehaviour
         {
             for (int z = -worldSizeZ; z < worldSizeZ; z++)
             {
-                var blockSize = 1f;
-                var pos = new Vector3(x * blockSize * startPosition.x,
+                var pos = new Vector3(x * BlockSize + startPosition.x,
                     GenerateNoise(x, z, DetailScale) * noiseHeight,
-                    z * blockSize * startPosition.z);
+                    z * BlockSize + startPosition.z);
 
                 var block = Instantiate(blockGameObject, pos, Quaternion.identity) as GameObject;
 
@@ -67,7 +68,28 @@ public class GenerateGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Mathf.Abs(xPlayerMove) >= BlockSize || Mathf.Abs(zPlayerMove) >= BlockSize)
+        {
+            for (var x = -worldSizeX; x < worldSizeX; x++)
+            {
+                for (int z = -worldSizeZ; z < worldSizeZ; z++)
+                {
+                    var pos = new Vector3(x * BlockSize + xPlayerLocation,
+                        GenerateNoise(x + xPlayerLocation, z + zPlayerLocation, DetailScale) * noiseHeight,
+                        z * BlockSize + zPlayerLocation);
+
+                    if (!blockContainer.ContainsKey(pos))
+                    {
+                        var block = Instantiate(blockGameObject, pos, Quaternion.identity) as GameObject;
+
+                        blockContainer.Add(pos, block);
+                        blockPositions.Add(block.transform.position);
+
+                        block.transform.SetParent(this.transform);
+                    }
+                }
+            }
+        }
     }
 
     //private void SpawnObjects()
@@ -90,6 +112,11 @@ public class GenerateGrid : MonoBehaviour
     //    blockPositions.RemoveAt(randomIndex);
     //    return newPos;
     //}
+
+    private void GenerateTerrain()
+    {
+
+    }
 
     private float GenerateNoise(int x, int z, float detailScale)
     {
