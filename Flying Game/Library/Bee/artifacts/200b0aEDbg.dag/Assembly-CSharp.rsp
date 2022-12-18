@@ -352,7 +352,11 @@
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/GenerateGrid.cs"
+"Assets/Scripts/MapDisplay.cs"
+"Assets/Scripts/MapGenerator.cs"
 "Assets/Scripts/MeshGenerator.cs"
+"Assets/Scripts/Noise.cs"
+"Assets/Scripts/TextureGenerator.cs"
 -langversion:9.0
 
 /deterministic
