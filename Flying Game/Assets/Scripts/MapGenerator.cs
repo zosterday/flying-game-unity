@@ -65,9 +65,13 @@ public class MapGenerator : MonoBehaviour
         {
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
         }
-        else
+        else if (drawMode == DrawMode.ColorMap)
         {
             display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
+        }
+        else if (drawMode == DrawMode.Mesh)
+        {
+            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap), TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
         }
     }
 
@@ -95,6 +99,7 @@ public class MapGenerator : MonoBehaviour
     {
         NoiseMap,
         ColorMap,
+        Mesh,
     };
 }
 
