@@ -433,37 +433,37 @@ MonoBehaviour:
   drawMode: 1
   mapWidth: 100
   mapHeight: 100
-  noiseScale: 7.38
+  noiseScale: 25
   octaves: 10
   persistence: 0.433
   lacunarity: 2.53
-  seed: 115
+  seed: 91
   offset: {x: 6.13, y: 0.61}
   regions:
   - name: Deep Water
     height: 0.3
-    color: {r: 0.18609825, g: 0.5264462, b: 0.9622642, a: 0}
+    color: {r: 0.08699717, g: 0.40111536, b: 0.8018868, a: 0}
   - name: Shallow Water
     height: 0.4
-    color: {r: 0.41688275, g: 0.8490566, b: 0.21226415, a: 0}
+    color: {r: 0.2117647, g: 0.5076858, b: 0.8509804, a: 0}
   - name: Sand
-    height: 1
-    color: {r: 0.41688275, g: 0.8490566, b: 0.21226415, a: 0}
-  - name: Land
-    height: 0.45
-    color: {r: 0.41688275, g: 0.8490566, b: 0.21226415, a: 0}
+    height: 0.475
+    color: {r: 0.9811321, g: 0.9309119, b: 0.7080812, a: 0}
   - name: Grass
     height: 0.55
-    color: {r: 0.41688275, g: 0.8490566, b: 0.21226415, a: 0}
+    color: {r: 0.3019752, g: 0.8679245, b: 0.036845837, a: 0}
   - name: Grass2
-    height: 1
-    color: {r: 0.41688275, g: 0.8490566, b: 0.21226415, a: 0}
+    height: 0.6
+    color: {r: 0.03163936, g: 0.745283, b: 0.13517213, a: 0}
   - name: Rock
-    height: 1
-    color: {r: 0.41688275, g: 0.8490566, b: 0.21226415, a: 0}
+    height: 0.7
+    color: {r: 0.5283019, g: 0.400932, b: 0.28159484, a: 0}
   - name: Rock2
+    height: 0.9
+    color: {r: 0.2924528, g: 0.19525497, b: 0.120016016, a: 0}
+  - name: Snow
     height: 1
-    color: {r: 0.41688275, g: 0.8490566, b: 0.21226415, a: 0}
+    color: {r: 1, g: 1, b: 1, a: 0}
   autoUpdate: 1
 --- !u!4 &1776268742
 Transform:
