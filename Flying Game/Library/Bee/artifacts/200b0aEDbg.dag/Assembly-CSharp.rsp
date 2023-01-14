@@ -355,6 +355,7 @@
 "Assets/Scripts/GenerateGrid.cs"
 "Assets/Scripts/MapDisplay.cs"
 "Assets/Scripts/MapGenerator.cs"
+"Assets/Scripts/MeshData.cs"
 "Assets/Scripts/MeshGenerator.cs"
 "Assets/Scripts/Noise.cs"
 "Assets/Scripts/TextureGenerator.cs"

@@ -12,11 +12,11 @@ public static class Noise
 
     public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves, float persistence, float lacunarity, Vector2 offset, NormalizeMode normalizeMode)
     {
-        float[,] noiseMap = new float[mapWidth, mapHeight];
+        var noiseMap = new float[mapWidth, mapHeight];
 
-        System.Random prng = new System.Random(seed);
+        var prng = new System.Random(seed);
 
-        Vector2[] octaveOffsets = new Vector2[octaves];
+        var octaveOffsets = new Vector2[octaves];
 
         var maxPossibleHeight = 0f;
         float amplitude = 1f;
@@ -37,11 +37,11 @@ public static class Noise
             scale = 0.0001f;
         }
 
-        float halfWidth = mapWidth * 0.5f;
-        float halfHeight = mapHeight * 0.5f;
+        var halfWidth = mapWidth * 0.5f;
+        var halfHeight = mapHeight * 0.5f;
 
-        float maxLocalNoiseHeight = float.MinValue;
-        float minLocalNoiseHeight = float.MaxValue;
+        var maxLocalNoiseHeight = float.MinValue;
+        var minLocalNoiseHeight = float.MaxValue;
 
         for (int y = 0; y < mapHeight; y++)
         {
@@ -49,7 +49,7 @@ public static class Noise
             {
                 amplitude = 1f;
                 frequency = 1f;
-                float noiseHeight = 0f;
+                var noiseHeight = 0f;
 
                 for (int i = 0; i < octaves; i++)
                 {
@@ -88,7 +88,7 @@ public static class Noise
                 }
                 else
                 {
-                    float normalizedHeight = noiseMap[x, y] + 1 / (maxPossibleHeight * 1.3f);
+                    float normalizedHeight = noiseMap[x, y] + 1 / (2f * maxPossibleHeight / 1.75f);
                     noiseMap[x, y] = Mathf.Clamp(normalizedHeight, 0, int.MaxValue);
                 }
             }
