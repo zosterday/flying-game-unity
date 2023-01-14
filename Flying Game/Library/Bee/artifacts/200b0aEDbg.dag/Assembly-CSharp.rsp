@@ -351,13 +351,16 @@
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/UnityEngine.UI.ref.dll"
+"Assets/Scripts/DrawMode.cs"
 "Assets/Scripts/EndlessTerrain.cs"
 "Assets/Scripts/GenerateGrid.cs"
+"Assets/Scripts/MapData.cs"
 "Assets/Scripts/MapDisplay.cs"
 "Assets/Scripts/MapGenerator.cs"
 "Assets/Scripts/MeshData.cs"
 "Assets/Scripts/MeshGenerator.cs"
 "Assets/Scripts/Noise.cs"
+"Assets/Scripts/TerrainType.cs"
 "Assets/Scripts/TextureGenerator.cs"
 -langversion:9.0
 

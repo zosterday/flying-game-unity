@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Editor/MapGeneratorEditor.cs" />
-    <Compile Include="Assets\Scripts\NewClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

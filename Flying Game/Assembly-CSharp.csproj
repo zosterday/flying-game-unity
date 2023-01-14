@@ -64,6 +64,9 @@
     <Compile Include="Assets/Scripts/EndlessTerrain.cs" />
     <Compile Include="Assets/Scripts/MapGenerator.cs" />
     <Compile Include="Assets/Scripts/MeshData.cs" />
+    <Compile Include="Assets/Scripts/TerrainType.cs" />
+    <Compile Include="Assets/Scripts/MapData.cs" />
+    <Compile Include="Assets/Scripts/DrawMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
