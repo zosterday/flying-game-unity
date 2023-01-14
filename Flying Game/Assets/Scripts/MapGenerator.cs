@@ -9,6 +9,9 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private DrawMode drawMode;
 
+    [SerializeField]
+    private Noise.NormalizeMode normalizeMode;
+
     public const int MapChunkSize = 241;
 
     [SerializeField]
@@ -129,7 +132,7 @@ public class MapGenerator : MonoBehaviour
 
     public MapData GenerateMapData(Vector2 center)
     {
-        var noiseMap = Noise.GenerateNoiseMap(MapChunkSize, MapChunkSize, seed, noiseScale, octaves, persistence, lacunarity, center + offset);
+        var noiseMap = Noise.GenerateNoiseMap(MapChunkSize, MapChunkSize, seed, noiseScale, octaves, persistence, lacunarity, center + offset, normalizeMode);
 
         var colorMap = new Color[MapChunkSize * MapChunkSize];
 
@@ -140,9 +143,12 @@ public class MapGenerator : MonoBehaviour
                 var currentHeight = noiseMap[x, y];
                 for (var i = 0; i < regions.Length; i++)
                 {
-                    if (currentHeight <= regions[i].Height)
+                    if (currentHeight >= regions[i].Height)
                     {
                         colorMap[y * MapChunkSize + x] = regions[i].Color;
+                    }
+                    else
+                    {
                         break;
                     }
                 }

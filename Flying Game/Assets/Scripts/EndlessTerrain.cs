@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EndlessTerrain : MonoBehaviour
 {
+    private const float scale = 5f;
+
     const float playerMoveThresholdForUpdate = 25f;
 
     const float sqrViewerMoveThresholdForUpdate = playerMoveThresholdForUpdate * playerMoveThresholdForUpdate;
@@ -29,7 +31,7 @@ public class EndlessTerrain : MonoBehaviour
 
     private Dictionary<Vector2, TerrainChunk> terrainChunksByCoords = new();
 
-    private List<TerrainChunk> chunksVisibleLastUpdate = new();
+    private static List<TerrainChunk> chunksVisibleLastUpdate = new();
 
     private void Start()
     {
@@ -44,7 +46,7 @@ public class EndlessTerrain : MonoBehaviour
 
     private void Update()
     {
-        ViewerPosition = new Vector2(viewer.position.x, viewer.position.z);
+        ViewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
 
         if ((playerPositionOld - ViewerPosition).sqrMagnitude > sqrViewerMoveThresholdForUpdate)
         {
@@ -73,11 +75,6 @@ public class EndlessTerrain : MonoBehaviour
                 if (terrainChunksByCoords.ContainsKey(viewedChunkCoord))
                 {
                     terrainChunksByCoords[viewedChunkCoord].UpdateTerrainChunk();
-
-                    if (terrainChunksByCoords[viewedChunkCoord].IsVisible())
-                    {
-                        chunksVisibleLastUpdate.Add(terrainChunksByCoords[viewedChunkCoord]);
-                    }
                 }
                 else
                 {
@@ -121,8 +118,9 @@ public class EndlessTerrain : MonoBehaviour
             meshRenderer = meshObject.AddComponent<MeshRenderer>();
             meshFilter = meshObject.AddComponent<MeshFilter>();
             meshRenderer.material = material;
-            meshObject.transform.position = positionV3;
+            meshObject.transform.position = positionV3 * scale;
             meshObject.transform.parent = parent;
+            meshObject.transform.localScale = Vector3.one * scale;
             SetVisible(false);
 
             lodMeshes = new LODMesh[detailLevels.Length];
@@ -189,6 +187,8 @@ public class EndlessTerrain : MonoBehaviour
                         lodMesh.RequestMesh(mapData);
                     }
                 }
+
+                chunksVisibleLastUpdate.Add(this);
             }
 
             SetVisible(visible);
