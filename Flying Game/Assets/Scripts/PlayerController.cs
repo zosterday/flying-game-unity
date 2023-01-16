@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = forwardMovement;
 
         var raycastPlanePos = raycastPlane.transform.position;
-        raycastPlane.transform.position = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 8f);
+        raycastPlane.transform.position = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 10f);
     }
 
     private void OnCollisionEnter(Collision collision)
