@@ -63,14 +63,14 @@
     <Compile Include="Assets/Scripts/CameraController.cs" />
     <Compile Include="Assets/Scripts/MeshGenerator.cs" />
     <Compile Include="Assets/Scripts/Noise.cs" />
+    <Compile Include="Assets/Scripts/SpawnManager.cs" />
     <Compile Include="Assets/Scripts/MapData.cs" />
+    <Compile Include="Assets/Scripts/ObjectPooler.cs" />
     <Compile Include="Assets/Scripts/TerrainType.cs" />
     <Compile Include="Assets/Scripts/DrawMode.cs" />
     <Compile Include="Assets/Scripts/TextureGenerator.cs" />
     <Compile Include="Assets/Scripts/EndlessTerrain.cs" />
     <Compile Include="Assets/Scripts/MapGenerator.cs" />
-    <Compile Include="Assets/Scripts/ObjectPooler.cs" />
-    <Compile Include="Assets/Scripts/SpawnManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

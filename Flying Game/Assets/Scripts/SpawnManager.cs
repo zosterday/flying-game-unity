@@ -8,11 +8,11 @@ public class SpawnManager : MonoBehaviour
 
     private const int CheckpointPosYCenter = 100;
 
-    private const float CheckpointZOffset = 100f;
+    private const float CheckpointZOffset = 25f;
 
-    private const float CheckpointPosMinOffset = -100f;
+    private const float CheckpointPosMinOffset = -20;
 
-    private const float CheckpointPosMaxOffset = 100f;
+    private const float CheckpointPosMaxOffset = 20f;
 
     private Vector3 firstCheckpointSpawnPos = new(0, 100, 50);
 

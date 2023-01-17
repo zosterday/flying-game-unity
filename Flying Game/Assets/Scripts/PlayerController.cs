@@ -66,4 +66,10 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        rb.velocity = Vector3.zero;
+        Debug.Log("Gay");
+    }
 }
