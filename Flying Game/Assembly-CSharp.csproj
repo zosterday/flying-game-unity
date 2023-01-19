@@ -71,6 +71,7 @@
     <Compile Include="Assets/Scripts/TextureGenerator.cs" />
     <Compile Include="Assets/Scripts/EndlessTerrain.cs" />
     <Compile Include="Assets/Scripts/MapGenerator.cs" />
+    <Compile Include="Assets/Scripts/Checkpoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

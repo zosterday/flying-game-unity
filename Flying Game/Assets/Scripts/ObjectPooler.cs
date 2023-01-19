@@ -6,7 +6,7 @@ public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler Instance;
 
-    private const int CheckpointPoolAmount = 10;
+    private const int CheckpointPoolAmount = 20;
 
     [SerializeField]
     private GameObject checkpointObj;

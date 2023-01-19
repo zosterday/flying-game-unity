@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    private const string CheckpointTag = "Checkpoint";
     [SerializeField]
     private GameObject raycastPlane;
 
@@ -70,6 +71,12 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         rb.velocity = Vector3.zero;
-        Debug.Log("Gay");
+        //Add particle effect for little poof thing around the loop
+        if (other.CompareTag(CheckpointTag))
+        {
+            var checkpointObj = other.GetComponent<Checkpoint>();
+            checkpointObj.IsReadyForInactive = true;
+            Debug.Log("Gay");
+        }
     }
 }
