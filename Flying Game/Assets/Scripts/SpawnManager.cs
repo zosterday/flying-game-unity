@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static int CheckpointSpawnCount { get; set; }
+
     private const int CheckpointSpawnMax = 5;
 
     private const int CheckpointPosYCenter = 100;
 
-    private const float CheckpointZOffset = 25f;
+    private const float CheckpointZOffset = 50f;
 
     private const float CheckpointPosMinOffset = -20;
 
@@ -16,22 +18,22 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 firstCheckpointSpawnPos = new(0, 100, 50);
 
-    private int checkpointSpawnCount;
-
     private Vector3 lastCheckpointPos;
+
+    private bool firstCheckpoint;
 
     private readonly System.Random random = new();
 
     // Start is called before the first frame update
     void Start()
     {
- 
+        firstCheckpoint = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var checkpointsToSpawn = CheckpointSpawnMax - checkpointSpawnCount;
+        var checkpointsToSpawn = CheckpointSpawnMax - CheckpointSpawnCount;
 
         if (checkpointsToSpawn != 0)
         {
@@ -48,9 +50,10 @@ public class SpawnManager : MonoBehaviour
     {
         for (var i = 0; i < count; i++)
         {
-            if (i == 0)
+            if (firstCheckpoint)
             {
                 lastCheckpointPos = firstCheckpointSpawnPos;
+                firstCheckpoint = false;
             }
             else
             {
@@ -64,7 +67,7 @@ public class SpawnManager : MonoBehaviour
             var checkpoint = ObjectPooler.Instance.GetCheckpointObject();
             checkpoint.transform.position = lastCheckpointPos;
             checkpoint.SetActive(true);
-            checkpointSpawnCount++;
+            CheckpointSpawnCount++;
         }
     }
 }

@@ -74,8 +74,8 @@ public class PlayerController : MonoBehaviour
         //Add particle effect for little poof thing around the loop
         if (other.CompareTag(CheckpointTag))
         {
-            var checkpointObj = other.GetComponent<Checkpoint>();
-            checkpointObj.IsReadyForInactive = true;
+            other.gameObject.SetActive(false);
+            SpawnManager.CheckpointSpawnCount--;
             Debug.Log("Gay");
         }
     }
