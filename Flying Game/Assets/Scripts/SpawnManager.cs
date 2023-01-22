@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public static int CheckpointSpawnCount { get; set; }
+    public int CheckpointSpawnCount { get; set; }
 
-    private const int CheckpointSpawnMax = 5;
+    public List<GameObject> ActiveCheckpointList { get; set; }
+
+    private const int CheckpointSpawnMax = 8;
 
     private const int CheckpointPosYCenter = 100;
 
@@ -28,6 +30,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         firstCheckpoint = true;
+        ActiveCheckpointList = new();
     }
 
     // Update is called once per frame
@@ -67,6 +70,7 @@ public class SpawnManager : MonoBehaviour
             var checkpoint = ObjectPooler.Instance.GetCheckpointObject();
             checkpoint.transform.position = lastCheckpointPos;
             checkpoint.SetActive(true);
+            ActiveCheckpointList.Add(checkpoint);
             CheckpointSpawnCount++;
         }
     }

@@ -355,6 +355,7 @@
 "Assets/Scripts/Checkpoint.cs"
 "Assets/Scripts/DrawMode.cs"
 "Assets/Scripts/EndlessTerrain.cs"
+"Assets/Scripts/GameManager.cs"
 "Assets/Scripts/GenerateGrid.cs"
 "Assets/Scripts/MapData.cs"
 "Assets/Scripts/MapDisplay.cs"

@@ -4,8 +4,17 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     private const string CheckpointTag = "Checkpoint";
+
+    private const string GameManagerName = "GameManager";
+
+    private const string SpawnManagerName = "SpawnManager";
+
     [SerializeField]
     private GameObject raycastPlane;
+
+    private GameManager gameManager;
+
+    private SpawnManager spawnManager;
 
     //[SerializeField]
     private float forwardSpeed = 50f;
@@ -27,10 +36,18 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        gameManager = GameObject.Find(GameManagerName).GetComponent<GameManager>();
+        spawnManager = GameObject.Find(SpawnManagerName).GetComponent<SpawnManager>();
     }
 
     private void Update()
     {
+        if (!gameManager.IsGameActive)
+        {
+            return;
+        }
+
         // Get the position of the mouse pointer
         position = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -61,22 +78,27 @@ public class PlayerController : MonoBehaviour
 
         var raycastPlanePos = raycastPlane.transform.position;
         raycastPlane.transform.position = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 10f);
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        rb.velocity = Vector3.zero;
+        //Check if player missed a checkpoint
+        var frontCheckpoint = spawnManager.ActiveCheckpointList[0];
+
+        if (transform.position.z > frontCheckpoint.transform.position.z)
+        {
+            //Game ends
+            //TODO: Add explosion in place of hte plane and call gameover() from gamemanager and everything to the game
+            gameManager.IsGameActive = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        rb.velocity = Vector3.zero;
-        //Add particle effect for little poof thing around the loop
+        //TODO:Add particle effect for little poof thing around the loop
         if (other.CompareTag(CheckpointTag))
         {
             other.gameObject.SetActive(false);
-            SpawnManager.CheckpointSpawnCount--;
-            Debug.Log("Gay");
+            spawnManager.CheckpointSpawnCount--;
+            spawnManager.ActiveCheckpointList.Remove(other.gameObject);
+            gameManager.UpdateScore(1);
         }
     }
 }
