@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -56,7 +57,6 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(position, out var raycastHit))
         {
             var pos = raycastHit.point;
-            //transform.position = new Vector3(pos.x, pos.y, transform.position.z);
             var destination = new Vector3(pos.x, pos.y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, destination, 0.1f);
         }
@@ -66,12 +66,7 @@ public class PlayerController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
 
         // Apply roll and pitch rotations to the player
-        roll -= mouseX * tiltAmount;
-        roll = Mathf.Clamp(roll, -55f, 55f);
-        pitch -= mouseY * tiltAmount;
-        pitch = Mathf.Clamp(pitch, -35f, 35f);
-        //transform.eulerAngles = new Vector3(pitch, 0f, roll);
-        var newTilt = new Vector3(pitch, 0f, roll);
+        var newTilt = CalculatePlayerAngle(mouseX, mouseY);
         transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, newTilt, TransformMovementSpeed);
 
         // Accelerate the player forward over time
@@ -83,7 +78,6 @@ public class PlayerController : MonoBehaviour
         rb.velocity = forwardMovement;
 
         var raycastPlanePos = raycastPlane.transform.position;
-        //raycastPlane.transform.position = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 10f);
         var raycastPlaneDestination = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 15f);
         raycastPlane.transform.position = Vector3.Lerp(raycastPlane.transform.position, raycastPlaneDestination, 0.1f);
 
@@ -94,8 +88,17 @@ public class PlayerController : MonoBehaviour
         {
             //Game ends
             //TODO: Add explosion in place of hte plane and call gameover() from gamemanager and everything to the game
-            gameManager.IsGameActive = false;
+            gameManager.GameOver();
         }
+    }
+
+    private Vector3 CalculatePlayerAngle(float mouseX, float mouseY)
+    {
+        roll -= mouseX * tiltAmount;
+        roll = Mathf.Clamp(roll, -55f, 55f);
+        pitch -= mouseY * tiltAmount;
+        pitch = Mathf.Clamp(pitch, -35f, 35f);
+        return new Vector3(pitch, 0f, roll);
     }
 
     private void OnTriggerEnter(Collider other)

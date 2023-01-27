@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Button startButton;
 
+    [SerializeField]
+    private GameObject gameoverPanel;
+
     private int score;
 
     // Start is called before the first frame update
@@ -43,16 +46,19 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameOverText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
+        gameoverPanel.SetActive(true);
+        //gameOverText.gameObject.SetActive(true);
+        //restartButton.gameObject.SetActive(true);
         IsGameActive = false;
     }
 
     public void RestartGame()
     {
-        restartButton.gameObject.SetActive(false);
-        startButton.gameObject.SetActive(true);
+        gameoverPanel.SetActive(false);
+        //restartButton.gameObject.SetActive(false);
+        //startButton.gameObject.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartGame();
     }
 
     public void StartGame()
