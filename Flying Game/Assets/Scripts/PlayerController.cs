@@ -15,6 +15,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject raycastPlane;
 
+    [SerializeField]
+    private ParticleSystem checkpointParticle;
+
+    [SerializeField]
+    private ParticleSystem explosionParticle;
+
     private GameManager gameManager;
 
     private SpawnManager spawnManager;
@@ -87,7 +93,9 @@ public class PlayerController : MonoBehaviour
         if (transform.position.z > frontCheckpoint.transform.position.z)
         {
             //Game ends
-            //TODO: Add explosion in place of hte plane and call gameover() from gamemanager and everything to the game
+            explosionParticle.transform.position = transform.position;
+            explosionParticle.Play();
+            gameObject.SetActive(false);
             gameManager.GameOver();
         }
     }
@@ -103,9 +111,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO:Add particle effect for little poof thing around the loop
         if (other.CompareTag(CheckpointTag))
         {
+            checkpointParticle.transform.position = other.transform.position;
+            checkpointParticle.Play();
             other.gameObject.SetActive(false);
             spawnManager.CheckpointSpawnCount--;
             spawnManager.ActiveCheckpointList.Remove(other.gameObject);
