@@ -1,4 +1,6 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
@@ -17,7 +19,11 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         var pos = transform.position;
-        transform.position = new Vector3(pos.x, pos.y, player.transform.position.z + offset.z);
-        //transform.position = player.transform.position + offset;
+        //transform.position = new Vector3(pos.x, pos.y, player.transform.position.z + offset.z);
+
+        //var destination = player.transform.position + offset;
+        var destination = new Vector3(pos.x, pos.y, player.transform.position.z + offset.z); ;
+        transform.position = Vector3.Lerp(transform.position, destination, 0.1f);
+        //transform.LookAt(player.transform);
     }
 }

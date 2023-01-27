@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     private const string SpawnManagerName = "SpawnManager";
 
+    private const float TransformMovementSpeed = 10f;
+
     [SerializeField]
     private GameObject raycastPlane;
 
@@ -54,7 +56,9 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(position, out var raycastHit))
         {
             var pos = raycastHit.point;
-            transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+            //transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+            var destination = new Vector3(pos.x, pos.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, destination, 0.1f);
         }
 
         // Get mouse input to control player's roll
@@ -66,7 +70,9 @@ public class PlayerController : MonoBehaviour
         roll = Mathf.Clamp(roll, -55f, 55f);
         pitch -= mouseY * tiltAmount;
         pitch = Mathf.Clamp(pitch, -35f, 35f);
-        transform.eulerAngles = new Vector3(pitch, 0f, roll);
+        //transform.eulerAngles = new Vector3(pitch, 0f, roll);
+        var newTilt = new Vector3(pitch, 0f, roll);
+        transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, newTilt, TransformMovementSpeed);
 
         // Accelerate the player forward over time
         forwardSpeed += Time.deltaTime * acceleration;
@@ -77,7 +83,9 @@ public class PlayerController : MonoBehaviour
         rb.velocity = forwardMovement;
 
         var raycastPlanePos = raycastPlane.transform.position;
-        raycastPlane.transform.position = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 10f);
+        //raycastPlane.transform.position = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 10f);
+        var raycastPlaneDestination = new Vector3(raycastPlanePos.x, raycastPlanePos.y, transform.position.z + 15f);
+        raycastPlane.transform.position = Vector3.Lerp(raycastPlane.transform.position, raycastPlaneDestination, 0.1f);
 
         //Check if player missed a checkpoint
         var frontCheckpoint = spawnManager.ActiveCheckpointList[0];

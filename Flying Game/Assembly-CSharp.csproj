@@ -71,8 +71,8 @@
     <Compile Include="Assets/Scripts/DrawMode.cs" />
     <Compile Include="Assets/Scripts/TextureGenerator.cs" />
     <Compile Include="Assets/Scripts/EndlessTerrain.cs" />
-    <Compile Include="Assets/Scripts/MapGenerator.cs" />
     <Compile Include="Assets/Scripts/GameManager.cs" />
+    <Compile Include="Assets/Scripts/MapGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
