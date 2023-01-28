@@ -26,18 +26,6 @@ public class GameManager : MonoBehaviour
 
     private int score;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
@@ -46,17 +34,21 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameoverPanel.SetActive(true);
-        //gameOverText.gameObject.SetActive(true);
-        //restartButton.gameObject.SetActive(true);
         IsGameActive = false;
+
+        StartCoroutine(WaitForExplosion());
+        
+    }
+
+    private IEnumerator WaitForExplosion()
+    {
+        yield return new WaitForSeconds(0.8f);
+        gameoverPanel.SetActive(true);
     }
 
     public void RestartGame()
     {
         gameoverPanel.SetActive(false);
-        //restartButton.gameObject.SetActive(false);
-        //startButton.gameObject.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         StartGame();
     }
@@ -68,6 +60,5 @@ public class GameManager : MonoBehaviour
         score = 0;
 
         UpdateScore(0);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

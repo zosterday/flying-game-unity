@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
@@ -93,11 +94,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.z > frontCheckpoint.transform.position.z)
         {
             //Game ends
-            explosionParticle.transform.position = transform.position;
-            explosionParticle.Play();
-            var planeMesh = transform.Find("Plane");
-            planeMesh.gameObject.SetActive(false);
-            gameManager.GameOver();
+            EndGame();
         }
     }
 
@@ -108,6 +105,16 @@ public class PlayerController : MonoBehaviour
         pitch -= mouseY * tiltAmount;
         pitch = Mathf.Clamp(pitch, -35f, 35f);
         return new Vector3(pitch, 0f, roll);
+    }
+
+    private void EndGame()
+    {
+        rb.velocity = Vector3.zero;
+        explosionParticle.transform.position = transform.position;
+        explosionParticle.Play();
+        var planeMesh = transform.Find("Plane");
+        planeMesh.gameObject.SetActive(false);
+        gameManager.GameOver();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -31,13 +31,16 @@ public class EndlessTerrain : MonoBehaviour
 
     private int chunksVisibleInViewDistance;
 
-    private Dictionary<Vector2, TerrainChunk> terrainChunksByCoords = new();
+    private Dictionary<Vector2, TerrainChunk> terrainChunksByCoords;
 
-    private static List<TerrainChunk> chunksVisibleLastUpdate = new();
+    private static List<TerrainChunk> chunksVisibleLastUpdate;
 
     private void Start()
     {
         mapGenerator = FindObjectOfType<MapGenerator>();
+
+        terrainChunksByCoords = new();
+        chunksVisibleLastUpdate = new();
 
         maxViewDst = detailLevels[detailLevels.Length - 1].visibleDistThreshold;
         chunkSize = MapGenerator.MapChunkSize - 1;
