@@ -92,3 +92,7 @@ Flying Game/Library/SceneVisibilityState.asset
 *.dll
 *.dll
 *.pdb
+*.log
+*.json
+*.asset
+Flying Game/Library/ArtifactDB

@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
             else
             {
                 var xPos = GetRandomFloat(CheckpointPosMinOffset * 1.5f, CheckpointPosMaxOffset * 1.5f);
-                var yPos = CheckpointPosYCenter + GetRandomFloat(CheckpointPosMinOffset * 0.8f, CheckpointPosMaxOffset * 0.8f);
+                var yPos = CheckpointPosYCenter + GetRandomFloat(CheckpointPosMinOffset * 0.75f, CheckpointPosMaxOffset * 0.75f);
                 var zPos = lastCheckpointPos.z + CheckpointZOffset;
 
                 lastCheckpointPos = new Vector3(xPos, yPos, zPos);
